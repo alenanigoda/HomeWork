@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "114a5a11-1c29-4afe-8447-fe83f786958f",
+		"name": "HW2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23575358"
+	},
+	"item": [
+		{
+			"name": "first",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Статус код 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Проверить, что в body приходит правильный string.\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"This is the first responce from server!ss\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/first",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"first"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Статус код 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Спарсить response body в json.\r",
+							" var user_info_3 = pm.response.json();\r",
+							"\r",
+							" //Проверить, что name в ответе равно name s request (name вбить руками.)\r",
+							"pm.test(\"Name_Helena\", function () {\r",
+							"    pm.expect(user_info_3.name).to.eql(\"Helena\");\r",
+							"});\r",
+							"//Проверить, что age в ответе равно age s request (age вбить руками.)\r",
+							"pm.test(\"Age_21\", function () {\r",
+							"    pm.expect(user_info_3.age).to.eql(\"21\");\r",
+							"});\r",
+							"//Проверить, что salary в ответе равно salary s request (salary вбить руками.)\r",
+							"pm.test(\"Salary_1000\", function () {\r",
+							"    pm.expect(user_info_3.salary).to.eql(1000);\r",
+							"});\r",
+							"//Спарсить request\r",
+							" let req = request.data\r",
+							"\r",
+							"//Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"pm.test(\"Name_Helena_resp\", function () {\r",
+							"    pm.expect(user_info_3.name).to.eql(req.name);\r",
+							"});\r",
+							"//Проверить, что age в ответе равно age s request (age забрать из request.)\r",
+							"pm.test(\"Age_21_resp\", function () {\r",
+							"    pm.expect(user_info_3.age).to.eql(req.age);\r",
+							"});\r",
+							" //Проверить, что salary в ответе равно salary s request (salary забрать из request.)\r",
+							" pm.test(\"Salary_1000_resp\", function () {\r",
+							"    pm.expect(user_info_3.salary).to.eql(+req.salary);\r",
+							"});\r",
+							"    // Вывести в консоль параметр family из response.\r",
+							"pm.test(\"resp_family\", function () {\r",
+							"   console.log(user_info_3.family);\r",
+							"});\r",
+							" \r",
+							" //Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)\r",
+							"\r",
+							" pm.test(\"u_salary_1_5_year_resp\", function () {\r",
+							"    pm.expect(user_info_3.family.u_salary_1_5_year).to.eql(+req.salary * 4)\r",
+							" });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "21",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Helena",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Статус код 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							" //Спарсить request\r",
+							" let req = pm.request.url.query.toObject()\r",
+							" //Спарсить response body в json.\r",
+							" var resp = pm.response.json();\r",
+							"//Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"pm.test(\"Name_Helena\", function () {\r",
+							"    pm.expect(resp.name).to.eql(req.name);\r",
+							"});\r",
+							"//Проверить, что age в ответе равно age s request (age забрать из request.)\r",
+							"pm.test(\"Age_21\", function () {\r",
+							"    pm.expect(resp.age).to.eql(req.age);\r",
+							"});\r",
+							"//Проверить, что salary в ответе равно salary s request (salary забрать из request.)\r",
+							"pm.test(\"Salary_1000\", function () {\r",
+							"    pm.expect(resp.salary).to.eql(+req.salary);\r",
+							"});\r",
+							"//Вывести в консоль параметр family из response.\r",
+							"pm.test(\"resp_family\", function () {\r",
+							"   console.log(resp.family);\r",
+							"});\r",
+							"\r",
+							"//Проверить, что у параметра dog есть параметры name.\r",
+							"pm.test(\"Dog_have_name\", function (){\r",
+							"   pm.expect(resp.family.pets.dog).haveOwnProperty(\"name\");\r",
+							"})\r",
+							"//Проверить, что у параметра dog есть параметры age.\r",
+							"pm.test(\"Dog_have_age\", function (){\r",
+							"   pm.expect(resp.family.pets.dog).haveOwnProperty(\"age\");\r",
+							"})\r",
+							"//Проверить, что параметр name имеет значение Luky.\r",
+							"pm.test(\"Dog_have_name_Luky\", function (){\r",
+							"   pm.expect(resp.family.pets.dog.name).to.eql(\"Luky\");\r",
+							"})\r",
+							"//Проверить, что параметр age имеет значение 4.\r",
+							"pm.test(\"Dog_have_age_4\", function (){\r",
+							"   pm.expect(resp.family.pets.dog.age).to.eql(4);\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Helena",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "21",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/object_info_3?name=Helena&age=21&salary=1000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Helena"
+						},
+						{
+							"key": "age",
+							"value": "21"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Статус код 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Спарсить response body в json.\r",
+							"var resp = pm.response.json();\r",
+							"//Спарсить request.\r",
+							"let req = pm.request.url.query.toObject();\r",
+							"//Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"pm.test(\"Name_Helena\", function () {\r",
+							"    pm.expect(resp.name).to.eql(req.name);\r",
+							"});\r",
+							"//Проверить, что age в ответе равно age из request (age забрать из request.)\r",
+							"pm.test(\"Age_21\", function () {\r",
+							"    pm.expect(resp.age).to.eql(+req.age);\r",
+							"});\r",
+							"//Вывести в консоль параметр salary из request.\r",
+							"pm.test(\"Salary_console_req\", function () {\r",
+							"   console.log(req.salary);\r",
+							"});\r",
+							"// Вывести в консоль параметр salary из response.\r",
+							"pm.test(\"Salary_console_resp\", function () {\r",
+							"   console.log(resp.salary);\r",
+							"});\r",
+							"//Вывести в консоль 0-й элемент параметра salary из response.\r",
+							"pm.test(\"Salary_console_resp_0\", function () {\r",
+							"   console.log(resp.salary[0]);\r",
+							"   });\r",
+							"//Вывести в консоль 1-й элемент параметра salary параметр salary из response.\r",
+							"pm.test(\"Salary_console_resp_1\", function () {\r",
+							"   console.log(resp.salary[1]);\r",
+							"   });\r",
+							"//Вывести в консоль 2-й элемент параметра salary параметр salary из response.\r",
+							"pm.test(\"Salary_console_resp_2\", function () {\r",
+							"   console.log(resp.salary[2]);\r",
+							"   });\r",
+							"// Проверить, что 0-й элемент параметра salary равен salary из request (salary забрать из request.)\r",
+							"pm.test(\"Salary_resp=req_0\", function () {\r",
+							"    pm.expect(resp.salary[0]).to.eql(+req.salary);\r",
+							"});\r",
+							"//Проверить, что 1-й элемент параметра salary равен salary*2 из request (salary забрать из request.)\r",
+							"pm.test(\"Salary_resp=req_1\", function () {\r",
+							"    pm.expect(+resp.salary[1]).to.eql(+req.salary*2);\r",
+							"});\r",
+							"//Проверить, что 2-й элемент параметра salary равен salary*3 из request (salary забрать из request.)\r",
+							"pm.test(\"Salary_resp=req_2\", function () {\r",
+							"    pm.expect(+resp.salary[2]).to.eql(+req.salary*3);\r",
+							"});\r",
+							"\r",
+							"//Передать в окружение переменную name\r",
+							" let name =req.name\r",
+							"pm.environment.set(\"name \", name);\r",
+							"//Передать в окружение переменную age\r",
+							"let age =req.age\r",
+							"pm.environment.set(\"age \", age);\r",
+							"//Передать в окружение переменную salary\r",
+							"let salary =req.salary\r",
+							"pm.environment.set(\"salary \", salary);\r",
+							"//Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.\r",
+							"\r",
+							"  for(i=0; i<resp.salary.length; i++);\r",
+							"  {\r",
+							" console.log(resp.salary[i]);\r",
+							" }\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_4?name=Helena&age=21&salary=1000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Helena"
+						},
+						{
+							"key": "age",
+							"value": "21"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Статус код 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Спарсить response body в json.\r",
+							"var resp = pm.response.json();\r",
+							"//Спарсить request.\r",
+							"let req = request.data\r",
+							"//Проверить, что json response имеет параметр start_qa_salary\r",
+							" pm.test(\"Start_qa_salary\", function (){\r",
+							"   pm.response.to.have.jsonBody(\"start_qa_salary\");\r",
+							"   });\r",
+							"   //Проверить, что json response имеет параметр qa_salary_after_6_months\r",
+							"    pm.test(\"qa_salary_after_6_months\", function (){\r",
+							"   pm.response.to.have.jsonBody(\"qa_salary_after_6_months\");\r",
+							"   });\r",
+							"   //Проверить, что json response имеет параметр qa_salary_after_12_months\r",
+							"    pm.test(\"qa_salary_after_12_months\", function (){ pm.response.to.have.jsonBody(\"qa_salary_after_12_months\");\r",
+							"   });\r",
+							"//Проверить, что json response имеет параметр qa_salary_after_1.5_year\r",
+							"pm.test(\"qa_salary_after_1.5_year\", function (){ pm.response.to.have.jsonBody(\"qa_salary_after_1.5_year\");\r",
+							"   });\r",
+							"   //Проверить, что json response имеет параметр qa_salary_after_3.5_years\r",
+							"   pm.test(\"qa_salary_after_3.5_years\", function (){ pm.response.to.have.jsonBody(\"qa_salary_after_3.5_years\");\r",
+							"   });\r",
+							"   //Проверить, что json response имеет параметр person\r",
+							"   pm.test(\"person\", function (){ pm.response.to.have.jsonBody(\"person\");\r",
+							"   });\r",
+							"   //Проверить, что параметр start_qa_salary равен salary из request (salary забрать из request.)\r",
+							"\r",
+							"pm.test(\"start_qa_salary=req\", function () {\r",
+							"    pm.expect(resp.start_qa_salary).to.eql(+req.salary);\r",
+							"});\r",
+							"//Проверить, что параметр qa_salary_after_6_months равен salary*2 из request (salary забрать из request.)\r",
+							"pm.test(\"start_qa_salary=req*2\", function () {\r",
+							"    pm.expect(resp.qa_salary_after_6_months).to.eql(+req.salary*2);\r",
+							"});\r",
+							"//Проверить, что параметр qa_salary_after_12_months равен salary*2.7 из request (salary забрать из request.)\r",
+							"pm.test(\"start_qa_salary=req*2.7\", function () {\r",
+							"    pm.expect(resp.qa_salary_after_12_months).to.eql(+req.salary*2.7);\r",
+							"});\r",
+							"\r",
+							"//Проверить, что параметр qa_salary_after_1.5_year равен salary*3.3 из request (salary забрать из request.)\r",
+							"\r",
+							"pm.test(\"start_qa_salary=req*3.3\", function () {\r",
+							"    pm.expect(resp['qa_salary_after_1.5_year']).to.eql(req.salary*3.3);\r",
+							"});\r",
+							"\r",
+							"//Проверить, что параметр qa_salary_after_3.5_years равен salary*3.8 из request (salary забрать из request.)\r",
+							"\r",
+							"pm.test(\"start_qa_salary=req*3.8\", function () {\r",
+							"    pm.expect(resp['qa_salary_after_3.5_years']).to.eql(req.salary*3.8);\r",
+							"});\r",
+							"\r",
+							"//Проверить, что в параметре person, 1-й элемент из u_name равен salary из request (salary забрать из request.)\r",
+							"pm.test(\"person[1]\", function () {\r",
+							"    pm.expect(resp.person.u_name[1]).to.eql(+req.salary);\r",
+							"    });\r",
+							"//Проверить, что что параметр u_age равен age из request (age забрать из request.)\r",
+							"pm.test(\"person_age\", function () {\r",
+							"    pm.expect(resp.person.u_age).to.eql(+req.age);\r",
+							"    });\r",
+							"//Проверить, что параметр u_salary_5_years равен salary*4.2 из request (salary забрать из request.)\r",
+							"pm.test(\"u_salary_5_years\", function () {\r",
+							"    pm.expect(resp.person.u_salary_5_years).to.eql(+req.salary*4.2);\r",
+							"    });\r",
+							"//***Написать цикл который выведет в консоль по порядку элементы списка из параметра person.\r",
+							"for (let i in resp.person ){\r",
+							"    console.log(i)\r",
+							"    console.log(resp.person[i])\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{name }}",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "{{age }}",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary }}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
